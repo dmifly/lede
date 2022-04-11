@@ -58,18 +58,12 @@ jobs:
 
           df -h
 
-#      - name: 同步最新的源码
+#      - name: Add Docker
 #        run: |
-#          git remote add openwrt https://github.com/coolsnowwolf/lede.git
-#          git pull openwrt master
-#          git remote -v
-          
-      - name: Add Docker
-        run: |
-          cd package
-          mkdir openwrt-packages
-          cd openwrt-packages
-          git clone https://github.com/blacktitty-y/luci-app-dockerman.git
+#          cd package
+#          mkdir openwrt-packages
+#          cd openwrt-packages
+#          git clone https://github.com/blacktitty-y/luci-app-dockerman.git
 
       - name: Update feeds
         run: |
@@ -86,13 +80,11 @@ jobs:
           # 例如:
 
           cat >> .config <<EOF
-          CONFIG_TARGET_IMAGES_GZIP=y
           CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
           CONFIG_KERNEL_BUILD_DOMAIN="Azure"
           CONFIG_TARGET_bcm53xx=y
           CONFIG_TARGET_bcm53xx_DEVICE_phicomm-k3=y
           CONFIG_TARGET_BOARD="bcm53xx"
-#          CONFIG_PACKAGE_luci-app-dockerman=y
           CONFIG_PACKAGE_k3screenctrl=y
 
 
